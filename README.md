@@ -50,6 +50,7 @@ This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICE
 
 ## Acknowledgments
 
-* Eric Smith - [website](https://ericsplayground.wordpress.com/author/ericsplayground/)
+* [Tiaan Swart](https://github.com/tiaanswart) who actually wrote it
+* [Eric Smith](https://ericsplayground.wordpress.com/author/ericsplayground/) who made DatatableFSC
 * [UnofficialSF.com](https://unofficialsf.com/) 
 * [GravityLab](gravitylab.nz) 
