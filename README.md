@@ -1,6 +1,6 @@
 # sosl_flow_component
 
-This is a basic SOSL apex invokable class, made primarily for use in flows. It was developed for use with [DatatableFSC](https://unofficialsf.com/datatable/), but can be use in any flow where a collection should be returned from a search. The benefit of using this approach is that you take advantage of Salesforce's fuzzy logic in search, where you can miss leading or trailing letters, or use close names, e.g. a search for Davi or Dave will return David.
+This is a basic SOSL apex invokable class, made primarily for use in flows. It was developed for use with [DatatableFSC](https://unofficialsf.com/datatable/), but can be used in any flow where a collection should be returned from a search. The benefit of using this approach is that you take advantage of Salesforce's fuzzy logic in search, where you can miss leading or trailing letters, or use close names, e.g. a search for Davi or Dave will return David.
 
 ## Getting Started
 
