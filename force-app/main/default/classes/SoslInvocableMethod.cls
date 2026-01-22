@@ -10,8 +10,19 @@ public with sharing class SoslInvocableMethod {
 
             System.debug('### SoslInvocableMethod execute req >>>'+req);
 
+            // Sanitize and Escape our queries
+            List<String> escapedQueries = new List<String>();
+            for (String query : req.queries) {
+                String escaped = escapeSoslReservedChars(query);
+                escaped = String.escapeSingleQuotes(escaped);
+                escapedQueries.add(escaped);
+            }
+
+            System.debug('### SoslInvocableMethod Escaped Queries >>>'+ escapedQueries);
             // Build Query String
-            String queryString = '\'' + String.join(req.queries, ' OR ') + '\'';
+
+            String queryString = '\'' + String.join(escapedQueries, ' OR ') + '\'';
+
             System.debug('### SoslInvocableMethod execute queryString >>>'+queryString);
 
             // Build SOSL
@@ -25,7 +36,7 @@ public with sharing class SoslInvocableMethod {
 
             // Execute the SOSL search
             Search.SearchResults searchResults = Search.find(sosl);
-            
+
             // Get the list of SObject results
             List<Search.SearchResult> recordList = searchResults.get(req.objectAPIName);
 
@@ -35,13 +46,36 @@ public with sharing class SoslInvocableMethod {
             for (Search.SearchResult searchResult : recordList) {
                 SObject record = searchResult.getSObject();
                 res.recordIds.add(record.Id);
-            } 
+            }
 
             // Add the response
             response.add(res);
         }
 
         return response;
+    }
+
+    private static String escapeSoslReservedChars(String input) {
+        if (String.isBlank(input)) {
+            return input;
+        }
+        return input
+            .replace('\\', '\\\\')  // Backslash must be first
+            .replace('?', '\\?')
+            .replace('*', '\\*')
+            .replace('&', '\\&')
+            .replace('|', '\\|')
+            .replace('!', '\\!')
+            .replace('{', '\\{')
+            .replace('}', '\\}')
+            .replace('[', '\\[')
+            .replace(']', '\\]')
+            .replace('(', '\\(')
+            .replace(')', '\\)')
+            .replace(':', '\\:')
+            .replace('^', '\\^')
+            .replace('~', '\\~')
+            .replace('"', '\\"');
     }
 
     public class Request {
