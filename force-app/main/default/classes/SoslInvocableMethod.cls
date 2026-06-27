@@ -59,23 +59,13 @@ public with sharing class SoslInvocableMethod {
         if (String.isBlank(input)) {
             return input;
         }
-        return input
-            .replace('\\', '\\\\')  // Backslash must be first
-            .replace('?', '\\?')
-            .replace('*', '\\*')
-            .replace('&', '\\&')
-            .replace('|', '\\|')
-            .replace('!', '\\!')
-            .replace('{', '\\{')
-            .replace('}', '\\}')
-            .replace('[', '\\[')
-            .replace(']', '\\]')
-            .replace('(', '\\(')
-            .replace(')', '\\)')
-            .replace(':', '\\:')
-            .replace('^', '\\^')
-            .replace('~', '\\~')
-            .replace('"', '\\"');
+        // In the single-quoted FIND 'term' form, the SOSL operator characters
+        // (? * & | ! { } [ ] ( ) : ^ ~ ") are treated as literal text, so they
+        // must NOT be backslash-escaped - doing so throws a QueryException:
+        // "Illegal character sequence '\&' in string literal". Only the backslash
+        // needs escaping here; the single quote is handled by the caller via
+        // String.escapeSingleQuotes.
+        return input.replace('\\', '\\\\');
     }
 
     public class Request {

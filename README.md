@@ -6,9 +6,9 @@ This is a basic SOSL apex invokable class, made primarily for use in flows. It w
 
 You can install the package from these links:
 
-[Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2w000004kaeW)
+[Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t2w000004kaeb)
 
-[Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t2w000004kaeW)
+[Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t2w000004kaeb)
 
 ## What It Does
 
